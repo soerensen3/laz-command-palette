@@ -1,0 +1,29 @@
+object CommandPalette: TCommandPalette
+  Left = 311
+  Height = 240
+  Top = 250
+  Width = 320
+  Caption = 'CommandPalette'
+  ClientHeight = 240
+  ClientWidth = 320
+  LCLVersion = '2.0.2.0'
+  object SearchComEd: TEdit
+    Left = 0
+    Height = 27
+    Top = 0
+    Width = 320
+    Align = alTop
+    OnChange = SearchComEdChange
+    TabOrder = 0
+    Text = 'SearchComEd'
+  end
+  object ViewComList: TListView
+    Left = 0
+    Height = 213
+    Top = 27
+    Width = 320
+    Align = alClient
+    Columns = <>
+    TabOrder = 1
+  end
+end
