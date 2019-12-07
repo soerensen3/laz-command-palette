@@ -21,13 +21,11 @@ object CommandPalette: TCommandPalette
       item
         Width = 680
       end>
-    OwnerDraw = True
     ReadOnly = True
     RowSelect = True
     ShowColumnHeaders = False
     TabOrder = 0
     ViewStyle = vsReport
-    OnDrawItem = ViewComListDrawItem
     OnKeyUp = FormKeyUp
     OnSelectItem = ViewComListSelectItem
   end

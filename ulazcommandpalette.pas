@@ -20,8 +20,6 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure SearchComEdAfterFilter(Sender: TObject);
-    procedure ViewComListDrawItem(Sender: TCustomListView; AItem: TListItem;
-      ARect: TRect; AState: TOwnerDrawState);
     procedure ViewComListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
   private
@@ -88,45 +86,9 @@ begin
     MenuItemCaption, nil, nil, ViewCommandPaletteCommand);
 
   CommandPalette := TCommandPalette.Create(Application);
-
-  // register dockable Window
-  {CommandPaletteCreator:=IDEWindowCreators.Add(
-    'CommandPalette',
-    @CreateCommandPalette, nil,
-    '100', '100', '300', '300'  // default place at left=100, top=100, right=300, bottom=300
-      // you can also define percentage values of screen or relative positions, see wiki
-    );}
-
 end;
 
 { TCommandPalette }
-
-procedure TCommandPalette.ViewComListDrawItem(Sender: TCustomListView;
-  AItem: TListItem; ARect: TRect; AState: TOwnerDrawState);
-var
-  Style: TTextStyle;
-begin
-  with ( Sender.Canvas ) do begin
-{    if ( bsPressed in AStates ) then begin
-      Brush.Color:= Blue900;
-      Font.Color:= White;
-    end else }if ( odSelected in AState ) then begin
-      Brush.Color:= $C06515;//Blue800;
-      Font.Color:= $FFFFFF;//White;
-    end else begin
-      Brush.Color:= $FFFFFF;//Blue700;
-      Font.Color:= $000000;//White;
-    end;
-
-    FillRect( ARect );
-    Style:= TextStyle;
-    Style.Alignment:= taLeftJustify;
-    Style.Layout:= tlCenter;
-    TListView( Sender ).SmallImages.Draw( Sender.Canvas, ARect.Left, ARect.Top, AItem.ImageIndex );
-    TextRect( ARect, 24, 0, AItem.Caption, Style );
-  end;
-
-end;
 
 procedure TCommandPalette.ViewComListSelectItem(Sender: TObject;
   Item: TListItem; Selected: Boolean);
@@ -192,15 +154,10 @@ function TCommandPalette.ShowModal: Integer;
 var
   i: Integer;
 begin
-  UpdateCommandPalette;
   SearchComEd.ResetFilter;
+  SearchComEd.Clear;
 
-  //Focus Edit
-  {for i:= 0 to SearchComEd.ControlCount - 1 do
-    if ( SearchComEd.Controls[ i ] is TEbEdit ) then begin
-      TEbEdit( SearchComEd.Controls[ i ]).Focused:= True;
-      break;
-    end;}
+  UpdateCommandPalette;
 
   Result:= inherited ShowModal;
 end;
